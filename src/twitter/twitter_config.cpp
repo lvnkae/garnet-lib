@@ -3,7 +3,7 @@
 *  @brief  [common]twitterê›íË
 *  @date   2017/12/11
 */
-#include "twitter_config.h"
+#include "twitter/twitter_config.h"
 
 #include "boost/property_tree/ptree.hpp"
 #include "boost/property_tree/ini_parser.hpp"

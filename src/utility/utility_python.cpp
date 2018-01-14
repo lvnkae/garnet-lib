@@ -3,10 +3,11 @@
  *  @brief  [common]pythonóçÇ›ÇÃUtilityä÷êî
  *  @date   2017/05/13
  */
-#include "utility_python.h"
+#include "utility/utility_python.h"
 
-#include "python_config.h"
-#include "utility_debug.h"
+#include "python/python_config.h"
+#include "utility/utility_debug.h"
+
 #include <fstream>
 
 namespace garnet

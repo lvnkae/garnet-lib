@@ -3,11 +3,11 @@
  *  @brief  [common]twitterAPIƒZƒbƒVƒ‡ƒ“
  *  @date   2017/12/31
  */
-#include "twitter_session.h"
+#include "twitter/twitter_session.h"
 
-#include "twitter_config.h"
-#include "utility_datetime.h"
-#include "utility_http.h"
+#include "twitter/twitter_config.h"
+#include "utility/utility_datetime.h"
+#include "utility/utility_http.h"
 
 #include "cpprest/http_client.h"
 #include "cpprest/oauth1.h"

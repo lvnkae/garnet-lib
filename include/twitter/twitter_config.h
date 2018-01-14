@@ -6,6 +6,8 @@
  */
 #pragma once
 
+#include "garnet-lib.h"
+
 #include <string>
 
 namespace garnet

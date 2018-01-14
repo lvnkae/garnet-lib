@@ -5,7 +5,7 @@
  */
 #include "cipher_aes.h"
 
-#include "utility_string.h"
+#include "utility/utility_string.h"
 
 #include "aes.h"
 #include "dh.h"

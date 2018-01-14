@@ -5,11 +5,12 @@
  */
 #include "http_cookies.h"
 
+#include "utility/utility_http.h"
+#include "utility/utility_string.h"
+
 #include "boost/algorithm/string.hpp"
 #include "cpprest/base_uri.h"
 #include "cpprest/http_headers.h"
-#include "utility_http.h"
-#include "utility_string.h"
 #include <codecvt>
 
 const wchar_t COOKIE_OBJ_DELIMITER[] = L";";

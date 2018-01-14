@@ -3,7 +3,7 @@
 *  @brief  [common]pythonê›íË
 *  @date   2017/12/11
 */
-#include "python_config.h"
+#include "python/python_config.h"
 
 #include "boost/property_tree/ptree.hpp"
 #include "boost/property_tree/ini_parser.hpp"

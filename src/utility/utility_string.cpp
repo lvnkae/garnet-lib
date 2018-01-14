@@ -3,7 +3,7 @@
  *  @brief  [common]•¶š—ñ‘€ìUtility
  *  @date   2017/12/18
  */
-#include "utility_string.h"
+#include "utility/utility_string.h"
 
 #include "random_generator.h"
 #include <vector>

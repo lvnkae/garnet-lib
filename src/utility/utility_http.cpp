@@ -3,10 +3,10 @@
  *  @brief  [common]HTTPŠÖ˜AUtility
  *  @date   2017/12/19
  */
-#include "utility_http.h"
+#include "utility/utility_http.h"
 
 #include "http_cookies.h"
-#include "utility_string.h"
+#include "utility/utility_string.h"
 
 #include "boost/algorithm/string.hpp"
 #include "cpprest/http_headers.h"

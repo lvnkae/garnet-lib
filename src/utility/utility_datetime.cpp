@@ -3,7 +3,7 @@
  *  @brief  [common]“úŽžŠÖ˜AUtility
  *  @date   2017/12/19
  */
-#include "utility_datetime.h"
+#include "utility/utility_datetime.h"
 
 #include "hhmmss.h"
 #include "yymmdd.h"
@@ -99,9 +99,9 @@ void ToTimeFromBoostPosixTime(const boost::posix_time::ptime& src, garnet::sTime
     boost::gregorian::date d = src.date();
     boost::posix_time::time_duration t = src.time_of_day();
 
-    o_tm.tm_sec = t.seconds();
-    o_tm.tm_min = t.minutes();
-    o_tm.tm_hour = t.hours();
+    o_tm.tm_sec = static_cast<int32_t>(t.seconds());
+    o_tm.tm_min = static_cast<int32_t>(t.minutes());
+    o_tm.tm_hour = static_cast<int32_t>(t.hours());
     o_tm.tm_mday = d.day();
     o_tm.tm_mon  = d.month() - 1;
     o_tm.tm_year = d.year() - 1900;

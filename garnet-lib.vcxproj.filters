@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{5ea54ed7-2985-4088-90fd-0815e06f047a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\twitter">
+      <UniqueIdentifier>{59641546-9ad5-41af-bb24-00d1905e33a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\python">
+      <UniqueIdentifier>{e44d5cd6-18c9-4260-8569-63031bf24bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility">
+      <UniqueIdentifier>{7138ada5-2fc5-4c77-b1d3-dc089bc69680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{38d1ed32-6b00-4a00-aaf1-a0f864e49125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utility">
+      <UniqueIdentifier>{49314d4f-39e9-4cd1-a95d-950c765a2936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\twitter">
+      <UniqueIdentifier>{ddd97e22-3e7b-4565-b500-420022b16bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\python">
+      <UniqueIdentifier>{d315beaa-7186-4d9a-846c-45bbf7eea938}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\cipher_aes.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\http_cookies.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lua_accessor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random_generator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\twitter\twitter_config.cpp">
+      <Filter>src\twitter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\twitter\twitter_session.cpp">
+      <Filter>src\twitter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\python\python_config.cpp">
+      <Filter>src\python</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\utility_string.cpp">
+      <Filter>src\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\utility_python.cpp">
+      <Filter>src\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\utility_http.cpp">
+      <Filter>src\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\utility_debug.cpp">
+      <Filter>src\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\utility_datetime.cpp">
+      <Filter>src\utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\http_cookies.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lua_accessor.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\random_generator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\yymmdd.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cipher_aes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\garnet_time.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hhmmss.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility\utility_string.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility\utility_datetime.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility\utility_debug.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility\utility_http.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility\utility_python.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\twitter\twitter_session_fwd.h">
+      <Filter>include\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\twitter\twitter_session.h">
+      <Filter>include\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\twitter\twitter_config_fwd.h">
+      <Filter>include\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\twitter\twitter_config.h">
+      <Filter>include\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\python\python_define.h">
+      <Filter>include\python</Filter>
+    </ClInclude>
+    <ClInclude Include="include\python\python_config_fwd.h">
+      <Filter>include\python</Filter>
+    </ClInclude>
+    <ClInclude Include="include\python\python_config.h">
+      <Filter>include\python</Filter>
+    </ClInclude>
+    <ClInclude Include="include\garnet-lib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
