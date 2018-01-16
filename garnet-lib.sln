@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "garnet-lib", "garnet-lib.vcxproj", "{8B487C14-F8C6-415D-B8EB-DF92B47577AC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{02650C3A-CE63-48D9-8668-28C3031FFF3A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B487C14-F8C6-415D-B8EB-DF92B47577AC} = {8B487C14-F8C6-415D-B8EB-DF92B47577AC}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +26,14 @@ Global
 		{8B487C14-F8C6-415D-B8EB-DF92B47577AC}.Release|Win32.Build.0 = Release|Win32
 		{8B487C14-F8C6-415D-B8EB-DF92B47577AC}.Release|x64.ActiveCfg = Release|x64
 		{8B487C14-F8C6-415D-B8EB-DF92B47577AC}.Release|x64.Build.0 = Release|x64
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Debug|Win32.ActiveCfg = Release|Win32
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Debug|Win32.Build.0 = Release|Win32
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Debug|x64.ActiveCfg = Debug|x64
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Debug|x64.Build.0 = Debug|x64
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Release|Win32.ActiveCfg = Release|Win32
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Release|Win32.Build.0 = Release|Win32
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Release|x64.ActiveCfg = Release|x64
+		{02650C3A-CE63-48D9-8668-28C3031FFF3A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
