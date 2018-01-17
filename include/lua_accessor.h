@@ -6,8 +6,6 @@
  */
 #pragma once
 
-#include "garnet-lib.h"
-
 #include <memory>
 #include <stack>
 #include <string>

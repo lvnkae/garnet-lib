@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 
+#include "lambda_scope.h"
 #include "multiple_http_request.h"
 
 #include <thread>
@@ -13,6 +14,7 @@ int _tmain(int argc, _TCHAR* argv[])
     setlocale( LC_ALL, "Japanese" );
 #endif/* WIN32 */
 
+#if 0
     for (int32_t inx = 0; inx < 10; inx++)
     {
 	    multiple_http_request test1;
@@ -24,6 +26,15 @@ int _tmain(int argc, _TCHAR* argv[])
         }
         test1.print_result_of_multiple_request_test1();
         std::this_thread::sleep_for(std::chrono::seconds(10));
+    }
+#endif
+    {
+        lambda_scope test2;
+        test2.start_local_ramda();
+    }
+    while(1)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(200));
     }
     printf("end");
 }

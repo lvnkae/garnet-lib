@@ -34,6 +34,15 @@ struct MMDD
      */
     static MMDD Create(const std::string& src);
 
+    /*!
+     *  @brief  •¶š—ñ‚Å“¾‚é
+     */
+    std::string to_string() const;
+    /*!
+     *  @brief  '/'‹æØ‚è‚Ì•¶š—ñ‚Å“¾‚é
+     */
+    std::string to_delim_string() const;
+
     bool operator==(const MMDD& right) const
     {
         return (m_month == right.m_month && m_day == right.m_day);
@@ -68,6 +77,15 @@ struct YYMMDD : public MMDD
      *  @note   ("10/01/01"‚Í2010”N1Œ1“ú)
      */
     static YYMMDD Create(const std::string& src);
+
+    /*!
+     *  @brief  •¶š—ñ‚Å“¾‚é
+     */
+    std::string to_string() const;
+    /*!
+     *  @brief  '/'‹æØ‚è‚Ì•¶š—ñ‚Å“¾‚é
+     */
+    std::string to_delim_string() const;
 
     bool operator==(const YYMMDD& right) const
     {

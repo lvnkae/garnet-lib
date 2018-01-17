@@ -5,6 +5,8 @@
  */
 #pragma once
 
+#include <string>
+
 namespace garnet
 {
 struct sTime;
@@ -24,6 +26,15 @@ struct HHMMSS
 
     HHMMSS(const garnet::sTime&);
     HHMMSS(garnet::sTime&&);
+
+    /*!
+     *  @brief  •¶š—ñ‚Å“¾‚é
+     */
+    std::string to_string() const;
+    /*!
+     *  @brief  ':'‹æØ‚è‚Ì•¶š—ñ‚Å“¾‚é
+     */
+    std::string to_delim_string() const;
 
     /*!
      *  @brief  00:00:00‚©‚ç‚ÌŒo‰ß•b”‚ğ“¾‚é

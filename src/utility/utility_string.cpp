@@ -86,19 +86,28 @@ void ToLower(const std::string& src, std::string& dst) { ToLowerCore<std::string
 
 /*!
  *  @brief  倍精度浮動小数を小数点以下N位まで文字列に変換
- *  @param[in]  src
- *  @param[out] dst 格納先
+ *  @param  src     入力小数値
+ *  @param  order   残す小数点桁数
  */
 std::wstring ToWstringOrder(float64 src, uint32_t order)
 {
-    std::wstring dst(std::to_wstring(src));
-    auto pos = dst.find(L'.');
-    if (pos != std::wstring::npos) {
-        std::wstring::iterator it = dst.begin();
+    return ToWstring(std::move(ToStringOrder(src, order)));
+}
+/*!
+ *  @brief  倍精度浮動小数を小数点以下N位まで文字列に変換
+ *  @param  src     入力小数値
+ *  @param  order   残す小数点桁数
+ */
+std::string ToStringOrder(float64 src, uint32_t order)
+{
+    std::string dst(std::to_string(src));
+    auto pos = dst.find('.');
+    if (pos != std::string::npos) {
+        std::string::iterator it = dst.begin();
         if (order == 0) {
             it = it + pos;  // 0位指定なら'.'も消す
         } else {
-            std::wstring::size_type del_point = pos + 1 + order;
+            std::string::size_type del_point = pos + 1 + order;
             if (dst.size() <= del_point) {
                 return dst; // 消す必要なし
             }

@@ -162,6 +162,8 @@ std::wstring GetLocalMachineTime(const std::wstring& format)
  *  @param[in]  base_tm ベース時刻
  *  @param[in]  diff_ms 差分ミリ秒
  *  @param[out] o_now   格納先
+ *  @note   mktimeもlocaltimeもローカルタイム処理
+ *  @note   localeは未設定でもJSTかGMTかUCTしかありえず、どれが来ても差分を取る分には辻褄合うのでOK
  */
 void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTime& o_now)
 {
@@ -183,34 +185,23 @@ void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTi
  *  @brief  指定日時after_day後の00:00までの時間をミリ秒で得る
  *  @param  pt          boost時間インターフェイス
  *  @param  after_day   何日後か
- *  @note   mktimeもlocaltimeもローカルタイム処理
- *  @note   localeは未設定でもJSTかGMTかUCTしかありえず、どれが来ても差分を取る分には辻褄合うのでOK
+ *  @note   mktimeは1月32日など存在しない月日を引数に渡しても正しい月日に読み替えて処理してくれる
  */
-int64_t GetAfterDayLimitMS(const boost::posix_time::ptime& pt, int32_t after_day)
+int64_t GetAfterDayLimitMS(const garnet::sTime& base_tm, int32_t after_day)
 {
     if (after_day <= 0) {
         return 0;
     }
-    garnet::sTime src_time;
-    ToTimeFromBoostPosixTime(pt, src_time);
     std::tm src_tm;
-    src_time.copy(src_tm);
-    std::time_t src_tt = std::mktime(&src_tm);
-    std::time_t after_tt = src_tt + SECONDS_OF_1DAY*after_day;
-#if defined(_WINDOWS)
     std::tm after_tm;
-    localtime_s(&after_tm, &after_tt);
-#else
-    std::tm after_tm = *std::localtime(&after_tt);
-#endif/* defined(_WINDOWS) */
-    {
-        after_tm.tm_sec = 0;
-        after_tm.tm_min = 0;
-        after_tm.tm_hour = 0;
-        after_tm.tm_wday = (src_tm.tm_wday+after_day)%DAYS_OF_1WEEK;
-        after_tt = std::mktime(&after_tm);
-    }
-
+    base_tm.copy(src_tm);
+    base_tm.copy(after_tm);
+    after_tm.tm_mday += after_day;
+    after_tm.tm_hour = 0;
+    after_tm.tm_min  = 0;
+    after_tm.tm_sec  = 0;
+    const std::time_t src_tt = std::mktime(&src_tm);
+    const std::time_t after_tt = std::mktime(&after_tm);
     return ToMiliSecondsFromSecond(static_cast<int32_t>(after_tt - src_tt));
 }
 /*!
@@ -230,86 +221,22 @@ int64_t ToMiliSecondsFromSecond(int32_t second)
     return static_cast<int64_t>(second)*MILISECONDS_OF_1SECOND;
 }
 
+/*!
+ *  @brief  1時間の秒数
+ */
+int32_t SecondsOf1Hour()
+{
+    return SECONDS_OF_1HOUR;
+}
+/*!
+ *  @brief  1分の秒数
+ */
+int32_t SecondsOf1Minute()
+{
+    return SECONDS_OF_1MINUTE;
+}
+
 } // namespace utility_datetime
-
-
-/*!
- *  @param  stime   年月日時分秒パラメータ
- */
-HHMMSS::HHMMSS(const garnet::sTime& stime)
-: m_hour(stime.tm_hour)
-, m_minute(stime.tm_min)
-, m_second(stime.tm_sec)
-{
-}
-HHMMSS::HHMMSS(garnet::sTime&& stime)
-: m_hour(stime.tm_hour)
-, m_minute(stime.tm_min)
-, m_second(stime.tm_sec)
-{
-}
-/*!
- *  @brief  00:00:00からの経過秒数を得る
- */
-int32_t HHMMSS::GetPastSecond() const
-{
-    return SECONDS_OF_1HOUR*m_hour + SECONDS_OF_1MINUTE*m_minute + m_second;
-}
-
-/*!
- *  @param  tm  年月日時分秒パラメータ
- */
-MMDD::MMDD(const garnet::sTime& stime)
-: m_month(stime.tm_mon+1) // 1始まり
-, m_day(stime.tm_mday)
-{
-}
-MMDD::MMDD(garnet::sTime&& stime)
-: m_month(stime.tm_mon+1) // 1始まり
-, m_day(stime.tm_mday)
-{
-}
-/*!
- *  @param  src "MM/DD"形式の月日文字列
- */
-MMDD MMDD::Create(const std::string& src)
-{
-    garnet::sTime mmdd_tm;
-    if (utility_datetime::ToTimeFromString(src, "%m/%d", mmdd_tm)) {
-        return MMDD(mmdd_tm);
-    } else {
-        return MMDD();
-    }
-}
-
-/*!
- *  @param  tm  年月日時分秒パラメータ
- */
-YYMMDD::YYMMDD(const garnet::sTime& stime)
-: MMDD(stime)
-, m_year(stime.tm_year + 1900) // 西暦
-{
-}
-YYMMDD::YYMMDD(garnet::sTime&& stime)
-: MMDD(stime)
-, m_year(stime.tm_year + 1900) // 西暦
-{
-}
-/*!
- *  @param  src "YYYY/MM/DD"形式の年月日文字列
- */
-YYMMDD YYMMDD::Create(const std::string& src)
-{
-    garnet::sTime yymmdd_tm;
-    if (utility_datetime::ToTimeFromString(src, "%Y/%m/%d", yymmdd_tm)) {
-        if (src.find('/') < 4) {
-            yymmdd_tm.tm_year += 100;
-        }
-        return YYMMDD(yymmdd_tm);
-    } else {
-        return YYMMDD();
-    }
-}
 
 sTime::sTime(const std::tm& src)
 : tm_sec(src.tm_sec)

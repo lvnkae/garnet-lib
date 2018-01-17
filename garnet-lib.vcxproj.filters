@@ -66,6 +66,12 @@
     <ClCompile Include="src\utility\utility_datetime.cpp">
       <Filter>src\utility</Filter>
     </ClCompile>
+    <ClCompile Include="src\yymmdd.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hhmmss.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\http_cookies.h">

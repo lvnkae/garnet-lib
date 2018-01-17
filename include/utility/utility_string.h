@@ -6,8 +6,6 @@
  */
 #pragma once
 
-#include "garnet-lib.h"
-
 #include <string>
 
 namespace garnet
@@ -48,9 +46,10 @@ void ToLower(const std::string& src, std::string& dst);
  *  @param  src     入力小数値
  *  @param  order   残す小数点桁数
  *  @return 文字列
- *  @note   std::to_wstringだと桁数指定ができないので
+ *  @note   std::to_wstring/std::to_stringだと桁数指定ができないので
  */
 std::wstring ToWstringOrder(float64 src, uint32_t order);
+std::string ToStringOrder(float64 src, uint32_t order);
 /*!
  *  @brief  秘匿したいID(数値)を下N桁だけ文字列に変換
  *  @param  src     ID

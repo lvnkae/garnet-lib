@@ -87,13 +87,13 @@ std::wstring GetLocalMachineTime(const std::wstring& format);
 void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTime& o_now);
 
 /*!
- *  @brief  指定日時after_day後の00:00までの時間をミリ秒で得る
- *  @param  pt          boost時間インターフェイス
+ *  @brief  起点日時からafter_day後の00:00までの時間をミリ秒で得る
+ *  @param  base_tm     起点日時
  *  @param  after_day   何日後か(翌日が1)
  *  @return 残り時間(ミリ秒)
  *  @note   0日後指定なら常に0を返す
  */
-int64_t GetAfterDayLimitMS(const boost::posix_time::ptime& pt, int32_t after_day);
+int64_t GetAfterDayLimitMS(const garnet::sTime& base_tm, int32_t after_day);
 /*!
  *  @brief  分をミリ秒で得る
  *  @param  minute  任意時間[分]
@@ -106,6 +106,15 @@ int64_t ToMiliSecondsFromMinute(int32_t minute);
  *  @retval 任意時間[ミリ秒]
  */
 int64_t ToMiliSecondsFromSecond(int32_t second);
+
+/*!
+ *  @brief  1時間の秒数
+ */
+int32_t SecondsOf1Hour();
+/*!
+ *  @brief  1分の秒数
+ */
+int32_t SecondsOf1Minute();
 
 
 } // namespace utility_datetime
