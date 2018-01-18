@@ -92,4 +92,15 @@ std::string HHMMSS::to_delim_string() const
     return ret;
 }
 
+/*!
+ *  @brief  HHMMSSのパラメータをセットする
+ *  @param  src
+ */
+void sTime::set(const HHMMSS& src)
+{
+    tm_hour = src.m_hour;
+    tm_min = src.m_minute;
+    tm_sec = src.m_second;
+}
+
 } // namespace garnet

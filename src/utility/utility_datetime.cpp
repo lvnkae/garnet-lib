@@ -45,12 +45,6 @@ boost::posix_time::ptime ToLocalTimeFromRFC1123(const std::wstring& rfc1123)
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> cv;
     return ToLocalTimeFromRFC1123(cv.to_bytes(rfc1123));
 }
-
-/*!
- *  @brief  RFC1123形式の日時文字列からローカル日時を得る
- *  @param[in]  rfc1123 RFC1123形式日時文字列
- *  @param[out] o_lcdt  ローカル日時格納先
- */
 boost::posix_time::ptime ToLocalTimeFromRFC1123(const std::string& rfc1123)
 {
     // newしたfacetはストリーム内で解放される(らしい)
@@ -71,6 +65,45 @@ boost::posix_time::ptime ToLocalTimeFromRFC1123(const std::string& rfc1123)
     return ldt.utc_time() + local_zone->base_utc_offset() + local_zone->dst_offset();
 }
 
+/*!
+ *  @brief  RFC1123形式日次文字列に変換
+ *  @param  date    年月日
+ *  @param  time    時刻
+ *  @param  zone    タイムゾーン文字列
+ */
+std::string ToRFC1123(const garnet::YYMMDD& date,
+                      const garnet::HHMMSS& time,
+                      const std::string& zone)
+{
+    std::tm t_tm;
+    {
+        garnet::sTime t_time;
+        t_time.set(date);
+        t_time.set(time);
+        t_time.copy(t_tm);
+        std::mktime(&t_tm); // 曜日補正
+    }
+    std::ostringstream ss;
+    ss << std::put_time(&t_tm, "%a, %d %b %Y %H:%M:%S");
+    //
+    if (!zone.empty()) {
+        return ss.str() + " " + zone;
+    } else {
+        return ss.str();
+    }
+}
+std::wstring ToRFC1123(const garnet::YYMMDD& date,
+                       const garnet::HHMMSS& time,
+                       const std::wstring& zone)
+{
+    std::string str(std::move(ToRFC1123(date, time, std::string())));
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utfconv;
+    if (!zone.empty()) {
+        return utfconv.from_bytes(str) + L" " + zone;
+    } else {
+        return utfconv.from_bytes(str);
+    }
+}
 
 /*!
  *  @brief  指定フォーマットの日時文字列をtmに変換

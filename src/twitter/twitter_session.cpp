@@ -154,7 +154,7 @@ bool TwitterSessionForAuthor::Tweet(const std::wstring& date, const std::wstring
     if (date.empty()) {
         // 日時指定されてなかったらシステム時間を入れる
         using utility_datetime::GetLocalMachineTime;
-        const std::wstring lc_date(std::move(GetLocalMachineTime(L"%a, %d %b %Y %H:%M:%S JST")));
+        const std::wstring lc_date(std::move(GetLocalMachineTime(L"%a, %d %b %Y %H:%M:%S")));
         return m_pImpl->Tweet(lc_date + twitter::GetNewlineString() + src);
     } else {
         return m_pImpl->Tweet(date + twitter::GetNewlineString() + src);

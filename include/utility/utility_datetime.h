@@ -12,6 +12,8 @@
 namespace garnet
 {
 struct sTime;
+struct YYMMDD;
+struct HHMMSS;
 
 namespace utility_datetime
 {
@@ -41,6 +43,19 @@ enum WeekOfDay
  */
 boost::posix_time::ptime ToLocalTimeFromRFC1123(const std::string& rfc1123);
 boost::posix_time::ptime ToLocalTimeFromRFC1123(const std::wstring& rfc1123);
+/*!
+ *  @brief  RFC1123形式日次文字列に変換
+ *  @param  date    年月日
+ *  @param  time    時刻
+ *  @param  zone    タイムゾーン文字列
+ */
+std::string ToRFC1123(const garnet::YYMMDD& date,
+                      const garnet::HHMMSS& time,
+                      const std::string& zone);
+std::wstring ToRFC1123(const garnet::YYMMDD& date,
+                       const garnet::HHMMSS& time,
+                       const std::wstring& zone);
+
 /*!
  *  @brief  指定フォーマットの日時文字列をtmに変換
  *  @param[in]  src     日時文字列

@@ -84,6 +84,16 @@ std::string MMDD::to_delim_string() const
     return ret;
 }
 
+/*!
+ *  @brief  MMDDのパラメータをセットする
+ *  @param  src
+ */
+void sTime::set(const MMDD& src)
+{
+    tm_mon = src.m_month - 1;
+    tm_mday = src.m_day;
+}
+
 
 /*!
  *  @param  tm  年月日時分秒パラメータ
@@ -128,6 +138,16 @@ std::string YYMMDD::to_string() const
 std::string YYMMDD::to_delim_string() const
 {
     return std::to_string(m_year) + DELIM + MMDD::to_delim_string();
+}
+
+/*!
+ *  @brief  YYMMDDのパラメータをセットする
+ *  @param  src
+ */
+void sTime::set(const YYMMDD& src)
+{
+    set(static_cast<const MMDD&>(src));
+    tm_year = src.m_year - 1900;
 }
 
 } // namespace garnet

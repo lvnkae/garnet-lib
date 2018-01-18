@@ -9,6 +9,9 @@ namespace std { struct tm; }
 
 namespace garnet
 {
+struct MMDD;
+struct YYMMDD;
+struct HHMMSS;
 
 /*!
  *  @brief  tmÇÃë„ópç\ë¢ëÃ
@@ -42,6 +45,10 @@ struct sTime
 
     sTime(const std::tm&);
     sTime(std::tm&&);
+
+    void set(const MMDD& src);
+    void set(const YYMMDD& src);
+    void set(const HHMMSS& src);
 
     void copy(std::tm&) const;
 };
