@@ -362,6 +362,10 @@ bool multiple_http_request::is_end_of_multiple_request_test1() const
 
 void multiple_http_request::print_result_of_multiple_request_test1() const
 {
+#if defined(WIN32)
+    setlocale( LC_ALL, "Japanese" );
+#endif/* WIN32 */
+
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utfconv;
     for (const auto& j2_team: m_result) {
         std::wcout << "(" << j2_team.first << ")" << j2_team.second.c_str() << std::endl;
