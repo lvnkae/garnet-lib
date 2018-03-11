@@ -51,6 +51,17 @@ struct sTime
     void set(const HHMMSS& src);
 
     void copy(std::tm&) const;
+
+    sTime operator+(const sTime& right);
+
+    /*!
+     *  @brief  ”N(tm_year)‚ğ¼—ï‚Å“¾‚é
+     */
+    int32_t to_AD() const;
+    /*!
+     *  @brief  Œ(tm_month)‚ğ—ïŒ‚Å“¾‚é
+     */
+    int32_t to_calender_month() const;
 };
 
 } // namespace garnet

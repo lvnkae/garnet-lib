@@ -191,9 +191,36 @@ std::wstring GetLocalMachineTime(const std::wstring& format)
 
 
 /*!
- *  @brief  base_tmにdiff_msを足しo_nowに出力
- *  @param[in]  base_tm ベース時刻
- *  @param[in]  diff_ms 差分ミリ秒
+ *  @brief  rightとleftの差を秒数で得る
+ *  @param  right
+ *  @param  left
+ */
+std::time_t DiffTimeBySecond(const garnet::sTime& right, const garnet::sTime& left)
+{
+    std::tm right_tm;
+    std::tm left_tm;
+    right.copy(right_tm);
+    left.copy(left_tm);
+    const std::time_t right_tt = std::mktime(&right_tm);
+    const std::time_t left_tt = std::mktime(&left_tm);
+    return std::abs(right_tt - left_tt);
+}
+/*!
+ *  @brief  rightとleftの差を日数で得る
+ *  @param  right
+ *  @param  left
+ */
+int32_t DiffTimeByDay(const garnet::sTime& right, const garnet::sTime& left)
+{
+    const std::time_t sec = DiffTimeBySecond(right, left);
+    return static_cast<int32_t>(sec/static_cast<std::time_t>(SECONDS_OF_1DAY));
+}
+
+
+/*!
+ *  @brief  年月日時分秒に差分[ミリ秒]を足す
+ *  @param[in]  base_tm ベース
+ *  @param[in]  diff_ms 差分[ミリ秒]
  *  @param[out] o_now   格納先
  *  @note   mktimeもlocaltimeもローカルタイム処理
  *  @note   localeは未設定でもJSTかGMTかUCTしかありえず、どれが来ても差分を取る分には辻褄合うのでOK
@@ -215,9 +242,9 @@ void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTi
 
 
 /*!
- *  @brief  指定日時after_day後の00:00までの時間をミリ秒で得る
- *  @param  pt          boost時間インターフェイス
- *  @param  after_day   何日後か
+ *  @brief  起点日時からafter_day後の00:00までの時間をミリ秒で得る
+ *  @param  base_tm     起点日時
+ *  @param  after_day   何日後か(翌日が1)
  *  @note   mktimeは1月32日など存在しない月日を引数に渡しても正しい月日に読み替えて処理してくれる
  */
 int64_t GetAfterDayLimitMS(const garnet::sTime& base_tm, int32_t after_day)
@@ -309,6 +336,19 @@ void sTime::copy(std::tm& dst) const
     dst.tm_wday = tm_wday;
     dst.tm_yday = tm_yday;
     dst.tm_isdst = tm_isdst;
+}
+
+sTime sTime::operator+(const sTime& right)
+{
+    std::tm sum;
+    sum.tm_sec = tm_sec + right.tm_sec;
+    sum.tm_min = tm_min + right.tm_min;
+    sum.tm_hour = tm_hour + right.tm_hour;
+    sum.tm_mday = tm_mday + right.tm_mday;
+    sum.tm_mon = tm_mon + right.tm_mon;
+    sum.tm_year = tm_year + right.tm_year;
+    std::mktime(&sum);
+    return sum;
 }
 
 } // namespace garnet

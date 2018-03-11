@@ -94,9 +94,23 @@ uint32_t GetDiffSecondsFromLocalMachineTime(const garnet::sTime& src);
 std::wstring GetLocalMachineTime(const std::wstring& format);
 
 /*!
- *  @brief  年月日時分秒に任意ミリ秒を足す
+ *  @brief  rightとleftの差を秒数(絶対値)で得る
+ *  @param  right
+ *  @param  left
+ */
+std::time_t DiffTimeBySecond(const garnet::sTime& right, const garnet::sTime& left);
+/*!
+ *  @brief  rightとleftの差を日数(絶対値)で得る
+ *  @param  right
+ *  @param  left
+ *  @note   日未満の差(時分秒)は切り捨て
+ */
+int32_t DiffTimeByDay(const garnet::sTime& right, const garnet::sTime& left);
+
+/*!
+ *  @brief  年月日時分秒に差分[ミリ秒]を足す
  *  @param[in]  base_tm ベース
- *  @param[in]  diff_ms 差分ミリ秒
+ *  @param[in]  diff_ms 差分[ミリ秒]
  *  @param[out] o_now   格納先
  */
 void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTime& o_now);
@@ -105,7 +119,7 @@ void AddTimeAndDiffMS(const garnet::sTime& base_tm, int64_t diff_ms, garnet::sTi
  *  @brief  起点日時からafter_day後の00:00までの時間をミリ秒で得る
  *  @param  base_tm     起点日時
  *  @param  after_day   何日後か(翌日が1)
- *  @return 残り時間(ミリ秒)
+ *  @return 残り時間[ミリ秒]
  *  @note   0日後指定なら常に0を返す
  */
 int64_t GetAfterDayLimitMS(const garnet::sTime& base_tm, int32_t after_day);

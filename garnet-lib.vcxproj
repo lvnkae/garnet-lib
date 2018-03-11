@@ -170,6 +170,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cipher_aes.cpp" />
+    <ClCompile Include="src\google\google_api_config.cpp" />
+    <ClCompile Include="src\google\google_calendar_api.cpp" />
     <ClCompile Include="src\hhmmss.cpp" />
     <ClCompile Include="src\http_cookies.cpp" />
     <ClCompile Include="src\lua_accessor.cpp" />
@@ -188,6 +190,9 @@
     <ClInclude Include="include\cipher_aes.h" />
     <ClInclude Include="include\garnet-lib.h" />
     <ClInclude Include="include\garnet_time.h" />
+    <ClInclude Include="include\google\google_api_config.h" />
+    <ClInclude Include="include\google\google_api_config_fwd.h" />
+    <ClInclude Include="include\google\google_calendar_api.h" />
     <ClInclude Include="include\hhmmss.h" />
     <ClInclude Include="include\http_cookies.h" />
     <ClInclude Include="include\lua_accessor.h" />

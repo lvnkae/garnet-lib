@@ -12,12 +12,59 @@ namespace garnet
 struct sTime;
 
 /*!
+ *  @brief  年月
+ */
+struct YYMM
+{
+    int32_t m_year;     //!< 年(西暦)
+    int32_t m_month;    //!< 暦月
+
+    YYMM()
+    : m_year(0)
+    , m_month(0)
+    {
+    }
+
+    YYMM(const garnet::sTime&);
+    YYMM(const garnet::YYMM&);
+
+    /*!
+     *  @brief  "YYYY/MM"形式の年月日文字列から生成
+     *  @param  src 年月文字列(1900年以降)
+     *  @note   西暦部分がが3桁以下ならば2000年代の省略形とみなす
+     *  @note   ("10/01"は2010年1月)
+     */
+    static YYMM Create(const std::string& src);
+
+    /*!
+     *  @brief  文字列で得る
+     *  @return YYYYMM
+     */
+    std::string to_string() const;
+    /*!
+     *  @brief  '/'区切りの文字列で得る
+     *  @return YYYY/MM
+     */
+    std::string to_delim_string() const;
+
+    /*!
+     *  @brief  月インクリメント
+     */
+    void inc_month();
+
+    bool operator>(const YYMM& right) const
+    {
+        return (m_year > right.m_year || (m_year == right.m_year && m_month > right.m_month));
+    }
+};
+
+/*!
  *  @brief  月日
  */
 struct MMDD
 {
-    int32_t m_month;    //! 月(1始まり)
-    int32_t m_day;      //! 日(1始まり)
+    int32_t m_month;    //! 歴月
+    int32_t m_day;      //! 歴日
 
     MMDD()
     : m_month(0)
@@ -36,12 +83,19 @@ struct MMDD
 
     /*!
      *  @brief  文字列で得る
+     *  @return MMDD
      */
     std::string to_string() const;
     /*!
      *  @brief  '/'区切りの文字列で得る
+     *  @return MM/DD
      */
     std::string to_delim_string() const;
+    /*!
+     *  @brief  '-'区切りの文字列で得る
+     *  @return MM-DD
+     */
+    std::string to_hyphen_string() const;
 
     bool operator==(const MMDD& right) const
     {
@@ -80,12 +134,30 @@ struct YYMMDD : public MMDD
 
     /*!
      *  @brief  文字列で得る
+     *  @return YYYYMMDD
      */
     std::string to_string() const;
     /*!
      *  @brief  '/'区切りの文字列で得る
+     *  @return YYYY/MM/DD
      */
     std::string to_delim_string() const;
+    /*!
+     *  @brief  '-'区切りの文字列で得る
+     *  @return YYYY-MM-DD
+     */
+    std::string to_hyphen_string() const;
+
+    /*!
+     *  @brief  num日後のYYMMDDを得る
+     *  @param  num 日数
+     */
+    YYMMDD GetAfterDay(int32_t num) const;
+    /*!
+     *  @brief  dstとの日数差(絶対値)を得る
+     *  @param  dst 比較年月日
+     */
+    int32_t GetDiffDay(const YYMMDD& dst) const;
 
     bool operator==(const YYMMDD& right) const
     {
