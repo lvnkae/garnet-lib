@@ -48,7 +48,7 @@ void web::http::cookies::Set(const web::http::http_headers& headers)
                     boost::algorithm::split(ck_param, obj, boost::is_any_of(COOKIE_PARAM_PIPE));
                     if (!ck_param.empty()) {
                         std::vector<std::wstring>::const_iterator& it = ck_param.begin();
-                        const std::wstring& key = *it++;
+                        const std::wstring key(std::move(boost::algorithm::trim_left_copy(*it++)));
                         if (it != ck_param.end()) {
                             if (!it->empty()) {
                                 std::wstring& elem = m_contents[key];
