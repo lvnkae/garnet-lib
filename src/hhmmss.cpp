@@ -35,6 +35,19 @@ HHMMSS::HHMMSS(garnet::sTime&& stime)
 }
 
 /*!
+ *  @brief  "HH:MM:SS"Œ`®‚Ì”NŒ“ú•¶š—ñ‚©‚ç¶¬
+ */
+HHMMSS HHMMSS::Create(const std::string& src)
+{
+    garnet::sTime hhmmss_tm;
+    if (utility_datetime::ToTimeFromString(src, "%T", hhmmss_tm)) {
+        return HHMMSS(hhmmss_tm);
+    } else {
+        return HHMMSS();
+    }
+}
+
+/*!
  *  @brief  00:00:00‚©‚ç‚ÌŒo‰ß•b”‚ğ“¾‚é
  */
 int32_t HHMMSS::GetPastSecond() const

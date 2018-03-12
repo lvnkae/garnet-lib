@@ -28,6 +28,12 @@ struct HHMMSS
     HHMMSS(garnet::sTime&&);
 
     /*!
+     *  @brief  "HH:MM:SS"Œ`®‚Ì”NŒ“ú•¶š—ñ‚©‚ç¶¬
+     *  @param  src •ª•b•¶š—ñ
+     */
+    static HHMMSS Create(const std::string& src);
+
+    /*!
      *  @brief  •¶š—ñ‚Å“¾‚é
      */
     std::string to_string() const;
