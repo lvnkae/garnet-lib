@@ -25,6 +25,12 @@ struct YYMM
     {
     }
 
+    YYMM(int32_t year, int32_t month)
+    : m_year(year)
+    , m_month(month)
+    {
+    }
+
     YYMM(const garnet::sTime&);
     YYMM(const garnet::YYMM&);
 
@@ -48,13 +54,25 @@ struct YYMM
     std::string to_delim_string() const;
 
     /*!
-     *  @brief  月インクリメント
+     *  @brief  月インクリメント(書き換え)
      */
     void inc_month();
+    /*!
+     *  @brief  前月を得る
+     */
+    YYMM prev() const;
 
     bool operator>(const YYMM& right) const
     {
         return (m_year > right.m_year || (m_year == right.m_year && m_month > right.m_month));
+    }
+    bool operator>=(const YYMM& right) const
+    {
+        return (m_year > right.m_year || (m_year == right.m_year && m_month >= right.m_month));
+    }
+    bool operator<=(const YYMM& right) const
+    {
+        return (right.m_year > m_year || (m_year == right.m_year && right.m_month >= m_month));
     }
 };
 

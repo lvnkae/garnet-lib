@@ -143,6 +143,17 @@ void YYMM::inc_month()
     }
 }
 
+/*!
+ *  @brief  前月を得る
+ */
+YYMM YYMM::prev() const
+{
+    if (m_month == CALENDER_MONTH_FIRST) {
+        return YYMM(m_year-1, CALENDER_MONTH_LAST);
+    } else {
+        return YYMM(m_year, m_month-1);
+    }
+}
 
 /*!
  *  @param  tm  年月日時分秒パラメータ

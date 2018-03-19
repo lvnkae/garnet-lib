@@ -295,6 +295,13 @@ int32_t SecondsOf1Minute()
 {
     return SECONDS_OF_1MINUTE;
 }
+/*!
+ *  @brief  1ƒ–Œ‚ÌÅ‘å“ú”
+ */
+int32_t GetMaxDayOfMonth()
+{
+    return 31;
+}
 
 } // namespace utility_datetime
 

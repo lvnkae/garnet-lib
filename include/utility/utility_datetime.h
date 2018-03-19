@@ -144,6 +144,10 @@ int32_t SecondsOf1Hour();
  *  @brief  1•ª‚Ì•b”
  */
 int32_t SecondsOf1Minute();
+/*!
+ *  @brief  1ƒ–Œ‚ÌÅ‘å“ú”
+ */
+int32_t GetMaxDayOfMonth();
 
 
 } // namespace utility_datetime
