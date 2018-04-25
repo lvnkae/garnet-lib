@@ -183,6 +183,7 @@ LuaAccessor::LuaAccessor()
 : m_pState(luaL_newstate())
 , m_table_top_stack()
 {
+    luaL_openlibs(m_pState.get());
 }
 /*!
  *  @brief
