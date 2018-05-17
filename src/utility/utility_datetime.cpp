@@ -295,6 +295,14 @@ int32_t SecondsOf1Minute()
 {
     return SECONDS_OF_1MINUTE;
 }
+
+/*!
+ *  @brief  Œæ“ª“ú
+ */
+int32_t GetFirstDayOfMonth()
+{
+    return 1;
+}
 /*!
  *  @brief  1ƒ–Œ‚ÌÅ‘å“ú”
  */

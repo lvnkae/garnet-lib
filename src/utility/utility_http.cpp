@@ -8,7 +8,6 @@
 #include "http_cookies.h"
 #include "utility/utility_string.h"
 
-#include "boost/algorithm/string.hpp"
 #include "cpprest/http_headers.h"
 #include "cpprest/http_msg.h"
 #include <codecvt>
@@ -117,7 +116,7 @@ void GetDomainFromURCoreL(const T& url, std::string& domain)
 {
     utility_string::ToLower(url, domain);
     std::vector<std::string> url_split;
-    boost::algorithm::split(url_split, domain, boost::is_any_of("/"));
+    utility_string::Split(domain, "/", url_split);
     const size_t len = url_split.size();
     if (len < 2) {
         domain.swap(std::string());

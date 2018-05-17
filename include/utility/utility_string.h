@@ -2,11 +2,13 @@
  *  @file   utility_string.h
  *  @brief  [common]文字列操作Utility
  *  @date   2017/12/18
- *  @note   RandomGenerator に依存している
+ *  @note   RandomGenerator, boost::algorithm に依存している
  */
 #pragma once
 
 #include <string>
+#include <unordered_set>
+#include <vector>
 
 namespace garnet
 {
@@ -40,6 +42,15 @@ std::wstring ToWstring(const std::string& src);
  */
 void ToLower(const std::wstring& src, std::string& dst);
 void ToLower(const std::string& src, std::string& dst);
+
+/*!
+ *  @brief  文字列分割
+ *  @param[in]  src
+ *  @param[in]  delim   分割文字(デリミタ)
+ *  @param[out] dst     結果格納先
+ */
+void Split(const std::string& src, const std::string& delim, std::vector<std::string>& dst);
+void Split(const std::string& src, const std::string& delim, std::unordered_set<std::string>& dst);
 
 /*!
  *  @brief  倍精度浮動小数を小数点第n位まで文字列に変換

@@ -173,6 +173,8 @@
     <ClCompile Include="src\google\google_api_config.cpp" />
     <ClCompile Include="src\google\google_calendar_api.cpp" />
     <ClCompile Include="src\hhmmss.cpp" />
+    <ClCompile Include="src\http\http_proxy.cpp" />
+    <ClCompile Include="src\http\http_proxy_config.cpp" />
     <ClCompile Include="src\http_cookies.cpp" />
     <ClCompile Include="src\lua_accessor.cpp" />
     <ClCompile Include="src\python\python_config.cpp" />
@@ -194,6 +196,9 @@
     <ClInclude Include="include\google\google_api_config_fwd.h" />
     <ClInclude Include="include\google\google_calendar_api.h" />
     <ClInclude Include="include\hhmmss.h" />
+    <ClInclude Include="include\http\http_proxy.h" />
+    <ClInclude Include="include\http\http_proxy_config.h" />
+    <ClInclude Include="include\http\http_proxy_config_fwd.h" />
     <ClInclude Include="include\http_cookies.h" />
     <ClInclude Include="include\lua_accessor.h" />
     <ClInclude Include="include\python\python_config.h" />

@@ -145,6 +145,10 @@ int32_t SecondsOf1Hour();
  */
 int32_t SecondsOf1Minute();
 /*!
+ *  @brief  Œæ“ª“ú
+ */
+int32_t GetFirstDayOfMonth();
+/*!
  *  @brief  1ƒ–Œ‚ÌÅ‘å“ú”
  */
 int32_t GetMaxDayOfMonth();

@@ -259,6 +259,14 @@ std::string YYMMDD::to_hyphen_string() const
 }
 
 /*!
+ *  @brief  YYMM‚ğ“¾‚é
+ */
+YYMM YYMMDD::to_yymm() const
+{
+    return YYMM(m_year, m_month);
+}
+
+/*!
  *  @brief  num“úŒã‚ÌYYMMDD‚ğ“¾‚é
  *  @param  num “ú”
  */

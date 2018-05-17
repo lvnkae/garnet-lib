@@ -24,7 +24,6 @@ struct YYMM
     , m_month(0)
     {
     }
-
     YYMM(int32_t year, int32_t month)
     : m_year(year)
     , m_month(month)
@@ -74,6 +73,14 @@ struct YYMM
     {
         return (right.m_year > m_year || (m_year == right.m_year && right.m_month >= m_month));
     }
+    bool operator==(const YYMM& right) const
+    {
+        return (right.m_year == m_year && right.m_month == m_month);
+    }
+    bool operator!=(const YYMM& right) const
+    {
+        return (right.m_year != m_year || right.m_month != m_month);
+    }
 };
 
 /*!
@@ -87,6 +94,11 @@ struct MMDD
     MMDD()
     : m_month(0)
     , m_day(0)
+    {
+    }
+    MMDD(int32_t month, int32_t day)
+    : m_month(month)
+    , m_day(day)
     {
     }
 
@@ -119,6 +131,10 @@ struct MMDD
     {
         return (m_month == right.m_month && m_day == right.m_day);
     }
+    bool operator<=(const MMDD& right) const
+    {
+        return (right.m_month > m_month || (m_month == right.m_month && right.m_day >= m_day));
+    }
 
     bool empty() const
     {
@@ -136,6 +152,11 @@ struct YYMMDD : public MMDD
     YYMMDD()
     : MMDD()
     , m_year(0)
+    {
+    }
+    YYMMDD(int32_t year, int32_t month, int32_t day)
+    : MMDD(month, day)
+    , m_year(year)
     {
     }
 
@@ -167,6 +188,11 @@ struct YYMMDD : public MMDD
     std::string to_hyphen_string() const;
 
     /*!
+     *  @brief  YYMMÇìæÇÈ
+     */
+    YYMM to_yymm() const;
+
+    /*!
      *  @brief  numì˙å„ÇÃYYMMDDÇìæÇÈ
      *  @param  num ì˙êî
      */
@@ -184,6 +210,23 @@ struct YYMMDD : public MMDD
         } else {
             return false;
         }
+    }
+    bool operator!=(const YYMMDD& right) const
+    {
+        return !((*this) == right);
+    }
+    bool operator<=(const YYMMDD& right) const
+    {
+        return (right.m_year > m_year || MMDD::operator<=(right));
+    }
+    bool operator>(const YYMMDD& right) const
+    {
+        return !YYMMDD::operator<=(right);
+    }
+    YYMMDD& operator++(int32_t)
+    {
+        (*this) = std::move(GetAfterDay(1));
+        return *this;
     }
 };
 

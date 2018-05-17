@@ -6,6 +6,8 @@
 #include "utility/utility_string.h"
 
 #include "random_generator.h"
+
+#include "boost/algorithm/string.hpp"
 #include <vector>
 
 namespace garnet
@@ -83,6 +85,21 @@ void ToLowerCore(const SrcString& src, std::string& dst)
 }
 void ToLower(const std::wstring& src, std::string& dst) { ToLowerCore<std::wstring, wchar_t>(src, dst); }
 void ToLower(const std::string& src, std::string& dst) { ToLowerCore<std::string, char>(src, dst); }
+
+/*!
+ *  @brief  文字列分割
+ *  @param[in]  src
+ *  @param[in]  delim   分割文字(デリミタ)
+ *  @param[out] dst     結果格納先
+ */
+void Split(const std::string& src, const std::string& delim, std::vector<std::string>& dst)
+{
+    boost::algorithm::split(dst, src, boost::is_any_of(delim));
+}
+void Split(const std::string& src, const std::string& delim, std::unordered_set<std::string>& dst)
+{
+    boost::algorithm::split(dst, src, boost::is_any_of(delim));
+}
 
 /*!
  *  @brief  倍精度浮動小数を小数点以下N位まで文字列に変換
