@@ -12,7 +12,6 @@
 #include "yymmdd.h"
 
 #include "cpprest/http_client.h"
-#include "cpprest/oauth1.h"
 #include <codecvt>
 
 namespace garnet
@@ -88,8 +87,7 @@ public:
         //
         web::http::client::http_client http_client(url);
         http_client.request(request)
-            .then([callback](web::http::http_response response) -> pplx::task<web::json::value>
-        {
+            .then([callback](web::http::http_response response) -> pplx::task<web::json::value> {
             if (response.status_code() == web::http::status_codes::OK) {
                 return response.extract_json();
             } else {
@@ -97,9 +95,7 @@ public:
             }
         }).then([callback](pplx::task<web::json::value> previousTask) {
             const web::json::value& v = previousTask.get();
-            if (v.is_null()) {
-                callback(false, false);
-            } else {
+            if (!v.is_null()) {
                 const web::json::object vo = v.as_object();
                 for (auto it = vo.cbegin(); it != vo.cend(); ++it) {
                     const std::wstring key_str = it->first;
@@ -111,8 +107,8 @@ public:
                         return;
                     }
                 }
-                callback(false, false);
             }
+            callback(false, false);
         });
     }
 };

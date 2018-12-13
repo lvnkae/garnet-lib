@@ -62,6 +62,10 @@ struct HHMMSS
     {
         return GetPastSecond() > right.GetPastSecond();
     }
+    bool operator<=(const HHMMSS& right) const
+    {
+        return GetPastSecond() <= right.GetPastSecond();
+    }
 };
 
 } // namespace garnet
